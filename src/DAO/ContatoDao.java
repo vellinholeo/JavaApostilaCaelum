@@ -43,6 +43,7 @@ public class ContatoDao{
 		while (rs.next()) {
 			// criando o objeto Contato
 			Contato contato = new Contato();
+			contato.setId(rs.getLong("id"));
 			contato.setNome(rs.getString("nome"));
 			contato.setEmail(rs.getString("email"));
 			contato.setEndereco(rs.getString("endereco"));

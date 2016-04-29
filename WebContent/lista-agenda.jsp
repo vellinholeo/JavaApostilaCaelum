@@ -8,6 +8,12 @@
 <html>
   <body>
     <table>
+    	<tr border="1">
+          <td>Nome</td> 
+          <td>email</td>
+          <td>endereco</td>
+          <td>data nascimento</td>
+        </tr>    
       <%
       ContatoDao dao = new ContatoDao();
       List<Contato> contatos = dao.getLista();
