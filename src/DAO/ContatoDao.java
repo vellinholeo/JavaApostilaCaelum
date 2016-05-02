@@ -85,7 +85,7 @@ public class ContatoDao{
 
 	public void altera(Contato contato) {
 		String sql = "update contatos set nome=?, email=?," + "endereco=?, dataNascimento=? where id=?";
-
+		System.out.println("nome:"+ contato.getNome());
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, contato.getNome());

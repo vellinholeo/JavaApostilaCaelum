@@ -1,9 +1,11 @@
 package mvc;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,30 +19,47 @@ public class AlteraAdicionaContato implements Logica {
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// TODO Auto-generated method stub
 		Contato contatos = new Contato();
-		
-		if (req.getAttribute("id") != null) {
+		ListaContatosLogic lcl = new ListaContatosLogic();
 
+		if (req.getParameter("id") != null) {
+			System.out.println("Entrou no if " + req.getParameter("nome"));
 			contatos.setId(Long.parseLong(req.getParameter("id")));
 			contatos.setNome(req.getParameter("nome"));
 			contatos.setEmail(req.getParameter("email"));
 			contatos.setEndereco(req.getParameter("endereco"));
-			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = (Date)formatter.parse(req.getParameter("dataNascimento")); 
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			contatos.setDataNascimento(cal);
+			Calendar dataNascimento = null;
+
+			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(req.getParameter("dataNascimento"));
+			dataNascimento = Calendar.getInstance();
+			dataNascimento.setTime(date);
 			
+			contatos.setDataNascimento(dataNascimento);
+
 			ContatoDao dao = new ContatoDao();
-			
+
 			dao.altera(contatos);
+			return lcl.executa(req, res);
 
-		}else{
-			//ADICIONA
+		} else {
+			contatos.setNome(req.getParameter("nome"));
+			contatos.setEmail(req.getParameter("email"));
+			contatos.setEndereco(req.getParameter("endereco"));
+			Calendar dataNascimento = null;
+
+			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(req.getParameter("dataNascimento"));
+			dataNascimento = Calendar.getInstance();
+			dataNascimento.setTime(date);
+			
+			contatos.setDataNascimento(dataNascimento);
+
+			ContatoDao dao = new ContatoDao();
+			dao.adiciona(contatos);
+			return lcl.executa(req, res);
 		}
-		
-		req.setAttribute("contatos", contatos);
 
-		return "WEB-INF/jsp/altera-contato.jsp";
+		// req.setAttribute("contatos", contatos);
+
+		// return "WEB-INF/jsp/altera-contato.jsp";
 	}
 
 }

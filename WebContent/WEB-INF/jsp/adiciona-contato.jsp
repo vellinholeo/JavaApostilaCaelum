@@ -11,19 +11,23 @@
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Altera contato</title>
+<title>Adiciona</title>	
 </head>
 <body>
 	<form action="mvc?logica=AlteraAdicionaContato" method="post">
 		<c:import url="cabecalho.jsp" />
-		ID: <input type="text" name="id" value="${contatos.id}" /> <br />
-		Nome: <input type="text" name="nome" value="${contatos.nome}"/> <br />
-		E-mail: <input type="text" name="email" value="${contatos.email}" /><br />
-		Endereco: <input type="text" name="endereco" value="${contatos.endereco}" /> <br /> 
-		Data: <input type="text" id="data" name="dataNascimento" value="<fmt:formatDate value="${contatos.dataNascimento.time}" pattern="dd/MM/yyyy" />" />
-		<leo:campoData id="data" />
+		<br /> Nome:
+		<input type="text" name="nome" value="${contatos.nome}" />
+		<br /> E-mail:
+		<input type="text" name="email" value="${contatos.email}" />
+		<br /> Endereco:
+		<input type="text" name="endereco" value="${contatos.endereco}" />
+		<br /> Data:
+		<input type="text" id="data" name="dataNascimento" value="<fmt:formatDate value="${contatos.dataNascimento.time}" pattern="dd/MM/yyyy" />" />
+		<leo:campoData id="data"/>
 		<br />
 		<td><input type="submit" value""></td>
+		
 	</form>
 	<c:import url="rodape.jsp" />
 </body>
