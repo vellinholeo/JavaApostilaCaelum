@@ -2,7 +2,6 @@ package mvc;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +20,12 @@ public class AlteraContatosLogic implements Logica{
 		contatos.setNome(req.getParameter("nome"));
 		contatos.setEmail(req.getParameter("email"));
 		contatos.setEndereco(req.getParameter("endereco"));	
-		Calendar dataNascimento = null;
-
-		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(req.getParameter("dataNascimento"));
-		dataNascimento = Calendar.getInstance();
-		dataNascimento.setTime(date);
 		
-		contatos.setDataNascimento(dataNascimento);
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		cal.setTime(sdf.parse(req.getParameter("dataNascimento")));
+		
+		contatos.setDataNascimento(cal);
 		
 		req.setAttribute("contatos", contatos);
 
