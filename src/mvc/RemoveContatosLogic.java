@@ -1,5 +1,7 @@
 package mvc;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,8 +16,10 @@ public class RemoveContatosLogic implements Logica {
 
 		Contato contato = new Contato();
 		contato.setId(id);
+		
+		Connection connection = (Connection) req.getAttribute("conexao");
 
-		ContatoDao dao = new ContatoDao();
+		ContatoDao dao = new ContatoDao(connection);
 		dao.remove(contato);
 
 		System.out.println("Excluindo contato... ");

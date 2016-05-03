@@ -13,8 +13,8 @@ import Model.Contato;
 public class ContatoDao{
 	private Connection connection;
 
-	public ContatoDao() throws SQLException {
-		this.connection = new ConnectionFactory().getConnection();
+	public ContatoDao(Connection connection) throws SQLException {
+		this.connection = connection;
 	}
 
 	public void adiciona(Contato contato) {

@@ -2,6 +2,7 @@ package agenda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,9 +56,10 @@ public class AdicionaContatoServlet extends HttpServlet {
         contato.setDataNascimento(dataNascimento);
         
         // salva o contato
+        Connection connection = (Connection) request.getAttribute("conexao");
         ContatoDao dao;
 		try {
-			dao = new ContatoDao();
+			dao = new ContatoDao(connection);
 			 dao.adiciona(contato);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

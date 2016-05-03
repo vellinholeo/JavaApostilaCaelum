@@ -1,5 +1,6 @@
 package mvc;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ public class AlteraAdicionaContato implements Logica {
 		// TODO Auto-generated method stub
 		Contato contatos = new Contato();
 		ListaContatosLogic lcl = new ListaContatosLogic();
+		Connection connection = (Connection) req.getAttribute("conexao");
 
 		if (req.getParameter("id") != null) {
 			System.out.println("Entrou no if " + req.getParameter("nome"));
@@ -34,8 +36,8 @@ public class AlteraAdicionaContato implements Logica {
 			dataNascimento.setTime(date);
 			
 			contatos.setDataNascimento(dataNascimento);
-
-			ContatoDao dao = new ContatoDao();
+			
+			ContatoDao dao = new ContatoDao(connection);
 
 			dao.altera(contatos);
 			return lcl.executa(req, res);
@@ -52,7 +54,7 @@ public class AlteraAdicionaContato implements Logica {
 			
 			contatos.setDataNascimento(dataNascimento);
 
-			ContatoDao dao = new ContatoDao();
+			ContatoDao dao = new ContatoDao(connection);
 			dao.adiciona(contatos);
 			return lcl.executa(req, res);
 		}
